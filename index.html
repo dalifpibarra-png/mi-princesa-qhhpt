@@ -95,6 +95,16 @@
   .razon p{font-size:15.5px; line-height:1.55; opacity:.9}
   #p2btn{margin-top:18px; opacity:0; transition:opacity .5s; pointer-events:none}
 
+  /* ---------- 2b. frases célebres ---------- */
+  .frases{display:grid; gap:12px; margin-top:24px}
+  .fr{perspective:1000px; height:96px; cursor:pointer}
+  .fr .cara{position:relative; width:100%; height:100%; transition:transform .6s cubic-bezier(.3,1,.4,1); transform-style:preserve-3d}
+  .fr.flip .cara{transform:rotateY(180deg)}
+  .fr .lado{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:18px; display:grid; place-items:center; padding:14px 18px; line-height:1.3}
+  .fr .frente{background:rgba(255,246,238,.06); border:1.5px dashed rgba(255,207,92,.45); font-family:var(--ft); font-size:26px; font-weight:600; font-style:italic; color:var(--oro)}
+  .fr .detras{background:linear-gradient(150deg,var(--oro),var(--oro-osc)); color:#1a1204; transform:rotateY(180deg); font-size:15px; font-weight:500; text-align:center}
+  #p2bbtn{margin-top:22px; opacity:0; transition:opacity .5s; pointer-events:none}
+
   /* ---------- 3. la carta ---------- */
   .foto{width:100%; border-radius:22px; overflow:hidden; box-shadow:0 26px 60px rgba(0,0,0,.6); margin-top:18px; aspect-ratio:4/3; background:#1a1a24; display:none}
   .foto img{width:100%; height:100%; object-fit:cover; display:block}
@@ -218,6 +228,34 @@
     <div class="contador"><b id="n">0</b> de <span id="tot">0</span> flores</div>
     <div class="razon" id="razon"><small id="rk"></small><h3 id="rt"></h3><p id="rp"></p></div>
     <div id="p2btn"><button class="btn" id="aCarta">Ya está el ramo →</button></div>
+  </section>
+
+  <!-- 2b. frases célebres -->
+  <section class="pantalla" id="p2b">
+    <div class="kicker">Antes de ponerme serio</div>
+    <h2>Nuestras frases<br><em>célebres</em></h2>
+    <p class="sub">Toca cada una. Ya sabes cuál es cuál.</p>
+    <div class="frases">
+      <div class="fr"><div class="cara">
+        <div class="lado frente">«No te confundas, princess»</div>
+        <div class="lado detras">La primera. Cuando apenas estábamos quedando… y te encantaba.</div></div></div>
+      <div class="fr"><div class="cara">
+        <div class="lado frente">«¡Pinche gatooo!»</div>
+        <div class="lado detras">La fiesta de Halloween. Todavía me río de tu cara cuando te lo conté.</div></div></div>
+      <div class="fr"><div class="cara">
+        <div class="lado frente">«Mi cocaaaa»</div>
+        <div class="lado detras">Con todas sus aes. No se negocia.</div></div></div>
+      <div class="fr"><div class="cara">
+        <div class="lado frente">«¡Pendejo!»</div>
+        <div class="lado detras">Mi papá. Con todo el amor del mundo… y tú riéndote de mí.</div></div></div>
+      <div class="fr"><div class="cara">
+        <div class="lado frente">«¡Amorrrr!»</div>
+        <div class="lado detras">Con todas sus erres. Así se llama a la persona correcta.</div></div></div>
+      <div class="fr"><div class="cara">
+        <div class="lado frente" style="font-size:22px">«Cuando alguien me amaba…»</div>
+        <div class="lado detras">La de Toy Story. Nuestro juego. Y para que conste: alguien te ama, y mucho.</div></div></div>
+    </div>
+    <div id="p2bbtn"><button class="btn" id="aCarta2">Ahora sí, en serio →</button></div>
   </section>
 
   <!-- 3. la carta -->
@@ -378,7 +416,20 @@ $('#escena').addEventListener('click', () => {
     setTimeout(() => { const w = $('#p2btn'); w.style.opacity = 1; w.style.pointerEvents = 'auto'; confetear(); }, 900);
   }
 });
-$('#aCarta').addEventListener('click', () => ir('p3'));
+$('#aCarta').addEventListener('click', () => ir('p2b'));
+
+/* ---------- 2b. frases que se voltean ---------- */
+let volteadas = 0;
+document.querySelectorAll('.fr').forEach(c => {
+  c.addEventListener('click', () => {
+    if (c.classList.contains('flip')) return;
+    c.classList.add('flip');
+    if (++volteadas === document.querySelectorAll('.fr').length) setTimeout(() => {
+      const w = $('#p2bbtn'); w.style.opacity = 1; w.style.pointerEvents = 'auto';
+    }, 700);
+  });
+});
+$('#aCarta2').addEventListener('click', () => ir('p3'));
 $('#aRegalo').addEventListener('click', () => ir('p4'));
 
 /* ---------- 4. la caja ---------- */
