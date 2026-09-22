@@ -97,7 +97,7 @@
 
   /* ---------- 2b. frases célebres ---------- */
   .frases{display:grid; gap:12px; margin-top:24px}
-  .fr{perspective:1000px; height:96px; cursor:pointer}
+  .fr{perspective:1000px; height:104px; cursor:pointer}
   .fr .cara{position:relative; width:100%; height:100%; transition:transform .6s cubic-bezier(.3,1,.4,1); transform-style:preserve-3d}
   .fr.flip .cara{transform:rotateY(180deg)}
   .fr .lado{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:18px; display:grid; place-items:center; padding:14px 18px; line-height:1.3}
@@ -173,6 +173,7 @@
   canvas.confeti{position:fixed; inset:0; z-index:99; pointer-events:none}
 
   @media (max-width:365px){
+    .fr .frente{font-size:22px} .fr .detras{font-size:14px} .fr{height:112px}
     .escena{height:300px} .flor{bottom:52px}
     .carta p{font-size:18px}
     .vale h3{font-size:30px}
